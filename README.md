@@ -1,6 +1,8 @@
 # promise-sos [![Build Status](https://travis-ci.com/iarroyo5/promise-sos.svg?branch=master)](https://travis-ci.com/iarroyo5/promise-sos)
 
-## Install
+A library that provides utilities for working with promises.
+
+## Installation
 
 ```sh
 npm i promise-sos
