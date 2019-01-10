@@ -1,0 +1,30 @@
+{
+  "name": "promise-sos",
+  "version": "0.0.1",
+  "description": "Helpers for using promise",
+  "main": "index.js",
+  "scripts": {
+    "build:watch": "./build.sh watch",
+    "build": "./build.sh prod",
+    "compile": "tsc --project .",
+    "isready": "npm run lint && npm test && npm run build",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-personalid:iarroyo5/promise-sos.git"
+  },
+  "keywords": [
+    "promise",
+    "helpers"
+  ],
+  "author": "Inaki Arroyo <dev@inakiarroyo.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "23.3.12",
+    "jest": "23.6.0",
+    "ts-jest": "23.10.5",
+    "typescript": "3.2.2"
+  }
+}
