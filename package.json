@@ -1,9 +1,11 @@
 {
   "name": "promise-sos",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Helpers for using promise",
   "main": "dist/index.js",
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "build:watch": "npm run build -- --watch",
     "build": "tsc --project .",
