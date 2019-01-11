@@ -11,7 +11,7 @@
     "build": "tsc --project .",
     "isready": "npm run lint && npm test && npm run build",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "release": "npm run build && npm pack",
+    "prepare": "npm run isready",
     "test": "jest"
   },
   "repository": {
@@ -28,6 +28,7 @@
     "@types/jest": "23.3.12",
     "jest": "23.6.0",
     "ts-jest": "23.10.5",
+    "tslint": "5.12.1",
     "typescript": "3.2.2"
   }
 }
