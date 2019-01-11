@@ -15,7 +15,11 @@ export type PromisesMapResult<T> = {
  * @template T represent the input object
  */
 export const promiseAllObject = async <T>(promisesMap: PromisesMap<T>): Promise<PromisesMapResult<T>> => {
-  if (typeof promisesMap !== 'object' || Object.keys(promisesMap).length === 0 && promisesMap.constructor === Object) {
+  if (
+    !promisesMap
+    || typeof promisesMap !== 'object'
+    || Object.keys(promisesMap).length === 0 && promisesMap.constructor === Object
+  ) {
     throw new TypeError('The input argument must be of type Object and not empty');
   }
 
