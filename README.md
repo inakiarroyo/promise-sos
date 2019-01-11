@@ -1,4 +1,6 @@
-# promise-sos [![Build Status](https://travis-ci.com/iarroyo5/promise-sos.svg?branch=master)](https://travis-ci.com/iarroyo5/promise-sos)
+# Promise SOS
+
+[![Build Status](https://travis-ci.com/iarroyo5/promise-sos.svg?branch=master)](https://travis-ci.com/iarroyo5/promise-sos) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 A library that provides utilities for working with promises.
 
