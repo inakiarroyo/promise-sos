@@ -6,7 +6,7 @@ module.exports = {
     '!<rootDir>/node_modules/',
     '!<rootDir>/src/**/index.ts',
     '!<rootDir>/**/*.d.ts',
-    '<rootDir>/src/**/*.{ts,tsx}'
+    '<rootDir>/src/**/*.{ts,tsx,js,jsx}'
   ],
   roots: ['<rootDir>/src'],
   modulePaths: ['<rootDir>/src/'],
@@ -14,10 +14,10 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '<rootDir>/dist'],
   coverageThreshold: {
     global: {
-      branches: 95,
-      functions: 95,
-      lines: 95,
-      statements: 95
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100
     }
   },
   transform: {

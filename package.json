@@ -1,6 +1,6 @@
 {
   "name": "promise-sos",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Helpers for using promise",
   "main": "index.js",
   "scripts": {
