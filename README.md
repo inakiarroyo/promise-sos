@@ -1,8 +1,15 @@
-# Promise SOS
+# Promise S.O.S
 
-[![Build Status](https://travis-ci.com/iarroyo5/promise-sos.svg?branch=master)](https://travis-ci.com/iarroyo5/promise-sos) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.com/iarroyo5/promise-sos.svg?branch=master)](https://travis-ci.com/iarroyo5/promise-sos)
+[![Coverage Status](https://coveralls.io/repos/github/iarroyo5/promise-sos/badge.svg?branch=master)](https://coveralls.io/github/iarroyo5/promise-sos?branch=master)
 
-A library that provides utilities for working with promises.
+[![npm version](https://badge.fury.io/js/promise-sos.svg)](https://badge.fury.io/js/promise-sos)
+![![Types: TypeScript]](https://img.shields.io/npm/types/typescript.svg)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+<!-- [![Downloads](https://img.shields.io/npm/dm/promise-sos.svg)](https://www.npmjs.com/package/promise-sos) -->
+
+A typed library that provides utilities for working with promises.
 
 ## Installation
 

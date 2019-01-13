@@ -11,16 +11,16 @@
     "build": "tsc --project .",
     "isready": "npm run lint && npm test && npm run build",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "prepare": "npm run isready",
     "test": "jest"
   },
   "repository": {
     "type": "git",
-    "url": "git@github-personalid:iarroyo5/promise-sos.git"
+    "url": "git@github.com:iarroyo5/promise-sos.git"
   },
   "keywords": [
     "promise",
-    "helpers"
+    "helpers",
+    "typescript"
   ],
   "author": "Inaki Arroyo <dev@inakiarroyo.com>",
   "license": "MIT",
