@@ -25,6 +25,7 @@ jobs:
         email: dev@inakiarroyo.com
         api_key: $NPM_API_KEY
         on:
+          branch: master
           tags: true
     - stage: deploy
       name: "Deploy to GitHub releases"
@@ -33,10 +34,12 @@ jobs:
         api_key: $GITHUB_TOKEN
         skip_cleanup: true
         on:
+          branch: master
           tags: true
     - stage: deploy
       name: "Deploy Coverage to Coveralls"
       script: npm run coveralls
       skip_cleanup: true
       on:
-          tags: true
+        branch: master
+        tags: true
