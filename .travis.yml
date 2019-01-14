@@ -1,12 +1,42 @@
 language: node_js
+cache: npm
+git:
+  quiet: true
+stages:
+  - test
+  - compile
+  - name: deploy
+    if: branch = master
 jobs:
   include:
-    - stage: npm release
-      script: echo "Deploying to npm ..."
+    - stage: test
+      name: "Lint Code"
+      script: npm run lint
+    - stage: test
+      name: "Unit Tests"
+      script: npm test
+    - stage: compile
+      name: "Build Code"
+      script: npm build
+    - stage: deploy
+      name: "Deploy to npmjs"
       deploy:
         provider: npm
         email: dev@inakiarroyo.com
         api_key: $NPM_API_KEY
         on:
           tags: true
-          branch: master
+    - stage: deploy
+      name: "Deploy to GitHub releases"
+      deploy:
+        provider: releases
+        api_key: $GITHUB_TOKEN
+        skip_cleanup: true
+        on:
+          tags: true
+    - stage: deploy
+      name: "Deploy Coverage to Coveralls"
+      script: npm run coveralls
+      skip_cleanup: true
+      on:
+          tags: true

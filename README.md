@@ -5,8 +5,8 @@
 
 [![npm version](https://badge.fury.io/js/promise-sos.svg)](https://badge.fury.io/js/promise-sos)
 ![![Types: TypeScript]](https://img.shields.io/npm/types/typescript.svg)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+<!-- [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) -->
 <!-- [![Downloads](https://img.shields.io/npm/dm/promise-sos.svg)](https://www.npmjs.com/package/promise-sos) -->
 
 A typed library that provides utilities for working with promises.
