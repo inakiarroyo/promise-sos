@@ -5,8 +5,7 @@ git:
 stages:
   - test
   - compile
-  - name: deploy
-    if: branch = master
+  - deploy
 jobs:
   include:
     - stage: test
@@ -17,7 +16,7 @@ jobs:
       script: npm test
     - stage: compile
       name: "Build Code"
-      script: npm build
+      script: npm run build
     - stage: deploy
       name: "Deploy to npmjs"
       deploy:
