@@ -1,6 +1,6 @@
 # Promise S.O.S
 
-[![Build Status](https://travis-ci.com/iarroyo5/promise-sos.svg?branch=master)](https://travis-ci.com/iarroyo5/promise-sos)
+[![Build status](https://badge.buildkite.com/1e6d0aa7d007ab080ea6b2f148bfcd703b36ee0b5c01b4c723.svg)](https://buildkite.com/spartan-code/promise-sos)
 [![Coverage Status](https://coveralls.io/repos/github/iarroyo5/promise-sos/badge.svg?branch=master)](https://coveralls.io/github/iarroyo5/promise-sos?branch=master)
 
 [![npm version](https://badge.fury.io/js/promise-sos.svg)](https://badge.fury.io/js/promise-sos)

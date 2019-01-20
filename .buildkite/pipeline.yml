@@ -1,0 +1,18 @@
+steps:
+  - label: ":hammer: Linting"
+    command: npm run lint
+  - label: ":hammer: Tests"
+    command: npm test
+  - label: ":hammer: Building"
+    command: npm run build
+
+  - wait
+
+  - trigger: "deploy-pipeline"
+    label: ":rocket: Deploy"
+    branches: "master"
+    async: true
+    build:
+      commit: "$BUILDKITE_COMMIT"
+      branch: "$BUILDKITE_BRANCH"
+      message: "$BUILDKITE_MESSAGE"

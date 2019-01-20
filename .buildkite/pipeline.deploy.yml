@@ -1,0 +1,16 @@
+steps:
+  - label: ":rocket: Deploy to npmjs"
+    comamnd: npm publish
+    branches: "master"
+    concurrency: 3
+    concurrency_group: "$BUILDKITE_PIPELINE_SLUG-deploy"
+  - label: ":rocket: Deploy to GitHub releases"
+    comamnd: echo "TODO"
+    branches: "master"
+    concurrency: 3
+    concurrency_group: "$BUILDKITE_PIPELINE_SLUG-deploy"
+  - label: ":rocket: Deploy Coverage to Coveralls"
+    command: npm run coveralls
+    branches: "master"
+    concurrency: 3
+    concurrency_group: "$BUILDKITE_PIPELINE_SLUG-deploy"
