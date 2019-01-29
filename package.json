@@ -36,7 +36,6 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "23.3.12",
-    "coveralls": "3.0.2",
     "jest": "23.6.0",
     "jsonlint": "1.6.3",
     "rimraf": "2.6.3",
