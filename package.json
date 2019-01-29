@@ -10,13 +10,18 @@
     "access": "public"
   },
   "scripts": {
-    "build:watch": "npm run build -- --watch",
+    "build:watch": "yarn build -- --watch",
     "build": "tsc --project .",
-    "isready": "npm run lint && npm test && npm run build",
-    "lint": "tslint -c tslint.json -p tsconfig.json",
-    "test": "jest",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls && rm -rf ./coverage",
-    "coveralls:tmp": "jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "isready": "yarn lint && yarn test && yarn build",
+    "jsonlint:files": "find . -name \"*.json\" | grep -v -f .eslintignore",
+    "jsonlint": "yarn --silent jsonlint:files | xargs -n1 jsonlint -q -c && echo \"jsonlint: no lint errors\"",
+    "lint": "tslint -c tslint.json -p tsconfig.json && echo \"tslint: no lint errors\"",
+    "prebuild": "rimraf build",
+    "release:test": "yarn build && npm pack",
+    "release": "yarn build && npm publish build",
+    "test:coverage": "jest --coverage",
+    "test:coverage:lcovonly": "jest --coverage --coverageReporters=lcovonly",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -33,6 +38,8 @@
     "@types/jest": "23.3.12",
     "coveralls": "3.0.2",
     "jest": "23.6.0",
+    "jsonlint": "1.6.3",
+    "rimraf": "2.6.3",
     "ts-jest": "23.10.5",
     "tslint": "5.12.1",
     "typescript": "3.2.2"

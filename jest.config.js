@@ -1,7 +1,7 @@
 module.exports = {
-  verbose: true,
+  verbose: false,
   automock: false,
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     '!<rootDir>/node_modules/',
     '!<rootDir>/src/**/index.ts',

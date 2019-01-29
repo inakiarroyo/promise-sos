@@ -1,0 +1,114 @@
+defaults: &defaults
+  working_directory: /tmp/promise-sos
+  docker:
+    - image: circleci/node:10.14
+
+install_js: &install_js
+  run:
+    name: Install js dependencies
+    command: |
+      yarn config set yarn-offline-mirror ~/.cache/npm-packages-offline-cache/v1
+      yarn --frozen-lockfile
+
+restore_yarn_cache: &restore_yarn_cache
+  restore_cache:
+    key: v2-yarn-sha-{{ checksum "yarn.lock" }}
+
+restore_yarn_offline_mirror: &restore_yarn_offline_mirror
+  restore_cache:
+    key: v2-npm-packages-offline-cache
+
+version: 2.0
+jobs:
+  checkout:
+    <<: *defaults
+    steps:
+      - checkout
+      - *restore_yarn_offline_mirror
+      - *restore_yarn_cache
+      - run:
+          name: Check versions and env
+          command: |
+            yarn --version
+            node --version
+            docker --version
+            docker-compose --version
+            env
+            yarn cache dir
+      - *install_js
+      - run:
+          name: Should not have any git not staged
+          command: git diff --exit-code
+      - save_cache:
+          key: v2-yarn-sha-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn/v4
+      - save_cache:
+          key: v2-npm-packages-offline-cache
+          paths:
+            - ~/.cache/npm-packages-offline-cache/v1
+
+  test_unit:
+    <<: *defaults
+    steps:
+      - checkout
+      - *restore_yarn_offline_mirror
+      - *restore_yarn_cache
+      - *install_js
+      # - run:
+      #     name: Check if yarn prettier was run
+      #     command: yarn prettier check-changed
+      - run:
+          name: Lint
+          command: yarn lint
+      - run:
+          name: Lint JSON
+          command: yarn jsonlint
+      - run:
+          name: Tests TypeScript definitions
+          command: yarn build
+      - run:
+          name: Tests fake browser
+          command: yarn test:coverage:lcovonly
+      - run:
+          name: Check coverage generated
+          command: |
+            if ! [[ -s coverage/lcov.info ]]
+            then
+              exit 1
+            fi
+      - run:
+          name: Coverage
+          command: echo "@TODO Codecov integration"
+          # command: bash <(curl -s https://codecov.io/bash) -Z -C $CIRCLE_SHA1
+
+  test_build:
+    <<: *defaults
+    steps:
+      - checkout
+      - *restore_yarn_offline_mirror
+      - *restore_yarn_cache
+      - *install_js
+      - run:
+          name: Can we generate the build?
+          command: yarn build
+      - run:
+          name: Can we build the docs?
+          echo: echo "@TODO Gen Docs integration"
+          # command: yarn docs:build
+      - run:
+          name: Test release
+          command: yarn release:test
+
+workflows:
+  version: 2
+  pipeline:
+    jobs:
+      - checkout
+      - test_unit:
+          requires:
+            - checkout
+      - test_build:
+          requires:
+            - checkout
+            - test_unit
