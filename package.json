@@ -2,13 +2,29 @@
   "name": "promise-sos",
   "version": "0.2.0",
   "description": "Helpers for using promise",
-  "main": "build/index.js",
+  "author": "Inaki Arroyo <dev@inakiarroyo.com> (http://inakiarroyo.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iarroyo5/promise-sos.git"
+  },
+  "engines": {
+    "node": ">=8.13",
+    "npm": ">=6.4",
+    "yarn": ">=1.13"
+  },
+  "main": "index.js",
   "files": [
     "build/"
   ],
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "promise",
+    "helpers",
+    "typescript"
+  ],
   "scripts": {
     "build:watch": "yarn build -- --watch",
     "build": "tsc --project .",
@@ -23,17 +39,6 @@
     "test:coverage:lcovonly": "jest --coverage --coverageReporters=lcovonly",
     "test": "jest"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:iarroyo5/promise-sos.git"
-  },
-  "keywords": [
-    "promise",
-    "helpers",
-    "typescript"
-  ],
-  "author": "Inaki Arroyo <dev@inakiarroyo.com>",
-  "license": "MIT",
   "devDependencies": {
     "@types/jest": "23.3.12",
     "jest": "23.6.0",
