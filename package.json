@@ -2,9 +2,9 @@
   "name": "promise-sos",
   "version": "0.2.0",
   "description": "Helpers for using promise",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "files": [
-    "dist/"
+    "build/"
   ],
   "publishConfig": {
     "access": "public"
