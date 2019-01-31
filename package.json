@@ -9,9 +9,9 @@
     "url": "git@github.com:iarroyo5/promise-sos.git"
   },
   "engines": {
-    "node": ">=8.12.3",
+    "node": ">=8.13",
     "npm": ">=6.4",
-    "yarn": ">=1.13"
+    "yarn": ">=1.12.3"
   },
   "main": "index.js",
   "files": [
