@@ -73,7 +73,7 @@ jobs:
       - run:
           name: Check coverage generated
           command: |
-            if ! [[ -s coverage/lcov.info ]]
+            if [ ! -f coverage/lcov.info ]
             then
               exit 1
             fi
