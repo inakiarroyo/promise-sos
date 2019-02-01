@@ -1,36 +1,38 @@
 import { promiseAllObject } from './promise-all-object';
 
 describe('validate input throws', () => {
+  const errorMessage = 'The input argument must be of type Object and not empty';
+
   it('should throw if the input is an empty object', async () => {
-    await expect(promiseAllObject({})).rejects.toThrowError('The input argument must be of type Object and not empty');
+    await expect(promiseAllObject({})).rejects.toThrowError(errorMessage);
   });
 
   it('should throw if the input is non object type', async () => {
-    await expect(promiseAllObject(true)).rejects.toThrowError('The input argument must be of type Object and not empty');
-    await expect(promiseAllObject(false)).rejects.toThrowError('The input argument must be of type Object and not empty');
-    await expect(promiseAllObject(1)).rejects.toThrowError('The input argument must be of type Object and not empty');
-    await expect(promiseAllObject('invalid')).rejects.toThrowError('The input argument must be of type Object and not empty');
+    await expect(promiseAllObject(true)).rejects.toThrowError(errorMessage);
+    await expect(promiseAllObject(false)).rejects.toThrowError(errorMessage);
+    await expect(promiseAllObject(1)).rejects.toThrowError(errorMessage);
+    await expect(promiseAllObject('invalid')).rejects.toThrowError(errorMessage);
   });
 });
 
 describe('validate resolved promise', () => {
   it('should resolve if there are non promise values as values', async () => {
     const result = await promiseAllObject({
-      1: 'resolved',
+      '1': 'resolved',
       '1234-5678': 1234,
-      test: true,
-      nullValue: null,
-      objectValue: {
+      'test': true,
+      'nullValue': null,
+      'objectValue': {
         keyA: 'a'
       }
     });
 
     expect(result).toEqual({
-      1: 'resolved',
+      '1': 'resolved',
       '1234-5678': 1234,
-      test: true,
-      nullValue: null,
-      objectValue: {
+      'test': true,
+      'nullValue': null,
+      'objectValue': {
         keyA: 'a'
       }
     });
@@ -54,16 +56,16 @@ describe('validate resolved promise', () => {
 
   it('should resolve if the values are a mix of promises and non promises', async () => {
     const result = await promiseAllObject({
-      promiseA: Promise.resolve('resolved promiseA'),
-      promiseB: Promise.resolve('resolved promiseB'),
-      1: 'resolved',
+      'promiseA': Promise.resolve('resolved promiseA'),
+      'promiseB': Promise.resolve('resolved promiseB'),
+      '1': 'resolved',
       '1234-5678': 1234
     });
 
     expect(result).toEqual({
-      promiseA: 'resolved promiseA',
-      promiseB: 'resolved promiseB',
-      1: 'resolved',
+      'promiseA': 'resolved promiseA',
+      'promiseB': 'resolved promiseB',
+      '1': 'resolved',
       '1234-5678': 1234
     });
   });
