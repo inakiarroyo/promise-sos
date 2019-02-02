@@ -2,33 +2,54 @@
   "name": "promise-sos",
   "version": "0.2.0",
   "description": "Helpers for using promise",
-  "main": "dist/index.js",
-  "files": [
-    "dist/"
-  ],
-  "scripts": {
-    "build:watch": "npm run build -- --watch",
-    "build": "tsc --project .",
-    "isready": "npm run lint && npm test && npm run build",
-    "lint": "tslint -c tslint.json -p tsconfig.json",
-    "prepare": "npm run isready",
-    "test": "jest"
-  },
+  "author": "Inaki Arroyo <dev@inakiarroyo.com> (http://inakiarroyo.com)",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github-personalid:iarroyo5/promise-sos.git"
+    "url": "git@github.com:iarroyo5/promise-sos.git"
+  },
+  "engines": {
+    "node": ">=8.13",
+    "npm": ">=6.4",
+    "yarn": ">=1.12.3"
+  },
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build/"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
     "promise",
-    "helpers"
+    "promises",
+    "utils",
+    "helpers",
+    "typescript"
   ],
-  "author": "Inaki Arroyo <dev@inakiarroyo.com>",
-  "license": "MIT",
+  "scripts": {
+    "build:watch": "yarn build -- --watch",
+    "build": "tsc --project .",
+    "isready": "yarn lint && yarn test && yarn build",
+    "jsonlint:files": "find . -name \"*.json\" | grep -v -f .eslintignore",
+    "jsonlint": "yarn --silent jsonlint:files | xargs -n1 jsonlint -q -c && echo \"jsonlint: no lint errors\"",
+    "lint": "tslint -c tslint.json -p tsconfig.json && echo \"tslint: no lint errors\"",
+    "prebuild": "rimraf build",
+    "release:test": "yarn build && npm pack",
+    "release": "yarn build && npm publish .",
+    "test:coverage": "jest --coverage",
+    "test:coverage:lcovonly": "jest --coverage --coverageReporters=lcovonly",
+    "test": "jest"
+  },
   "devDependencies": {
     "@types/jest": "23.3.12",
     "jest": "23.6.0",
+    "jsonlint": "1.6.3",
+    "rimraf": "2.6.3",
     "ts-jest": "23.10.5",
     "tslint": "5.12.1",
+    "tslint-config-spartancode": "0.1.1",
     "typescript": "3.2.2"
   }
 }

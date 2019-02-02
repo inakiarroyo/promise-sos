@@ -1,24 +1,27 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
     "declaration": true,
-    "lib": ["es2018", "dom"],
+    "jsx": "react",
+    "lib": ["es7", "dom"],
     "module": "commonjs",
-    "moduleResolution": "classic",
-    "outDir": "dist",
+    "moduleResolution": "node",
+    "outDir": "./build",
     "removeComments": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es5"
+    "target": "es6"
   },
   "include": [
-    "./src/**/*"
+    "dev",
+    "src"
   ],
   "exclude": [
-    "node_modules",
-    "dist",
+    "config",
     "coverage",
-    "**/*.test.ts"
+    "build",
+    "node_modules",
+    "scripts"
   ]
 }
