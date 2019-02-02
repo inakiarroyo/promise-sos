@@ -3534,7 +3534,7 @@ tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
 
-tslint-config-spartancode@^0.1.1:
+tslint-config-spartancode@0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/tslint-config-spartancode/-/tslint-config-spartancode-0.1.1.tgz#02e4f4712bc600f3b4c81604f779ccc8d4e609e7"
   integrity sha512-8Ou8At5f3Pu1tOAXz80P2y2p3lrOxN1EoZq8RMJF1WmbMb3WObEOskySirEJpgOnhre1TMkyNQLUQodOcRGDGQ==
