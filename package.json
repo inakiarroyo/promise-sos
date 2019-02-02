@@ -13,7 +13,8 @@
     "npm": ">=6.4",
     "yarn": ">=1.12.3"
   },
-  "main": "index.js",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "files": [
     "build/"
   ],
@@ -22,6 +23,8 @@
   },
   "keywords": [
     "promise",
+    "promises",
+    "utils",
     "helpers",
     "typescript"
   ],
@@ -34,7 +37,7 @@
     "lint": "tslint -c tslint.json -p tsconfig.json && echo \"tslint: no lint errors\"",
     "prebuild": "rimraf build",
     "release:test": "yarn build && npm pack",
-    "release": "yarn build && npm publish build",
+    "release": "yarn build && npm publish .",
     "test:coverage": "jest --coverage",
     "test:coverage:lcovonly": "jest --coverage --coverageReporters=lcovonly",
     "test": "jest"
