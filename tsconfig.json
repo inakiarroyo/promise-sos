@@ -14,8 +14,8 @@
     "target": "es6"
   },
   "include": [
-    "./dev/**/*",
-    "./src/**/*"
+    "dev",
+    "src"
   ],
   "exclude": [
     "config",
