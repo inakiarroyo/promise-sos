@@ -93,7 +93,7 @@ jobs:
           command: yarn build
       - run:
           name: Can we build the docs?
-          echo: echo "@TODO Gen Docs integration"
+          command: echo "@TODO Gen Docs integration"
           # command: yarn docs:build
       - run:
           name: Test release
