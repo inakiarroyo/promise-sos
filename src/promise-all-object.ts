@@ -25,7 +25,7 @@ export const promiseAllObject = async <T>(promisesMap: PromisesMap<T>): Promise<
   }
 
   const keys = Object.keys(promisesMap);
-  const promises = keys.map((key) => (promisesMap as any)[key]);
+  const promises = keys.map((key) => (promisesMap as any)[key]); // tslint:disable-line:no-any
 
   try {
     const resolvedPromises = await Promise.all(promises);

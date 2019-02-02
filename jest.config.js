@@ -1,7 +1,7 @@
 module.exports = {
-  verbose: true,
+  verbose: false,
   automock: false,
-  collectCoverage: true,
+  collectCoverage: false,
   collectCoverageFrom: [
     '!<rootDir>/node_modules/',
     '!<rootDir>/src/**/index.ts',
@@ -11,7 +11,7 @@ module.exports = {
   roots: ['<rootDir>/src'],
   modulePaths: ['<rootDir>/src/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  testPathIgnorePatterns: ['/node_modules/', '<rootDir>/dist'],
+  testPathIgnorePatterns: ['/node_modules/', '<rootDir>/build'],
   coverageThreshold: {
     global: {
       branches: 100,
