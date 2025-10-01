@@ -1,6 +1,6 @@
 {
   "name": "promise-sos",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Helpers for using promise",
   "author": "Inaki Arroyo <dev@inakiarroyo.com> (http://inakiarroyo.com)",
   "license": "MIT",
@@ -9,12 +9,18 @@
     "url": "git@github.com:iarroyo5/promise-sos.git"
   },
   "engines": {
-    "node": ">=8.13",
-    "npm": ">=6.4",
-    "yarn": ">=1.12.3"
+    "node": ">=18"
   },
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "./build/cjs/index.js",
+  "module": "./build/esm/index.js",
+  "types": "./build/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./build/cjs/index.js",
+      "import": "./build/esm/index.js",
+      "types": "./build/types/index.d.ts"
+    }
+  },
   "files": [
     "build/"
   ],
@@ -29,27 +35,28 @@
     "typescript"
   ],
   "scripts": {
-    "build:watch": "yarn build -- --watch",
-    "build": "tsc --project .",
     "isready": "yarn lint && yarn test && yarn build",
     "jsonlint:files": "find . -name \"*.json\" | grep -v -f .eslintignore",
     "jsonlint": "yarn --silent jsonlint:files | xargs -n1 jsonlint -q -c && echo \"jsonlint: no lint errors\"",
     "lint": "tslint -c tslint.json -p tsconfig.json && echo \"tslint: no lint errors\"",
-    "prebuild": "rimraf build",
     "release:test": "yarn build && npm pack",
     "release": "yarn build && npm publish .",
     "test:coverage": "jest --coverage",
     "test:coverage:lcovonly": "jest --coverage --coverageReporters=lcovonly",
-    "test": "jest"
+    "test": "jest",
+    "clean": "rimraf build",
+    "build": "yarn clean && tsc -p tsconfig.cjs.json && tsc -p tsconfig.esm.json && tsc -p tsconfig.types.json",
+    "build:watch": "tsc -p tsconfig.esm.json --watch"
   },
   "devDependencies": {
-    "@types/jest": "23.3.12",
-    "jest": "23.6.0",
-    "jsonlint": "1.6.3",
-    "rimraf": "2.6.3",
-    "ts-jest": "23.10.5",
-    "tslint": "5.12.1",
-    "tslint-config-spartancode": "0.1.1",
-    "typescript": "3.2.2"
+    "@types/jest": "^29.5.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-unused-imports": "^3.1.0",
+    "jest": "^29.7.0",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.6.0"
   }
 }
