@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Check versions
+        run: |
+          yarn --version
+          node --version
+          npm --version
+          yarn cache dir
+
+      - name: Ensure no uncommitted changes
+        run: git diff --exit-code
+
+  test_unit:
+    runs-on: ubuntu-latest
+    needs: checkout
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Lint JSON
+        run: yarn jsonlint
+
+      - name: TypeScript build check
+        run: yarn build
+
+      - name: Run tests with coverage
+        run: yarn test:coverage:lcovonly
+
+      - name: Ensure coverage file exists
+        run: |
+          if [ ! -f coverage/lcov.info ]; then
+            echo "coverage/lcov.info not found"
+            exit 1
+          fi
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/lcov.info
+          fail_ci_if_error: true
+
+  test_build:
+    runs-on: ubuntu-latest
+    needs: [checkout, test_unit]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Verify build
+        run: yarn build
+
+      - name: Build docs (placeholder)
+        run: echo "@TODO Gen Docs integration"
+        # run: yarn docs:build
+
+      - name: Test release package
+        run: yarn release:test
