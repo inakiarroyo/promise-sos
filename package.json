@@ -36,9 +36,9 @@
   ],
   "scripts": {
     "isready": "yarn lint && yarn test && yarn build",
-    "jsonlint:files": "find . -name \"*.json\" | grep -v -f .eslintignore",
-    "jsonlint": "yarn --silent jsonlint:files | xargs -n1 jsonlint -q -c && echo \"jsonlint: no lint errors\"",
-    "lint": "tslint -c tslint.json -p tsconfig.json && echo \"tslint: no lint errors\"",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check .",
     "release:test": "yarn build && npm pack",
     "release": "yarn build && npm publish .",
     "test:coverage": "jest --coverage",
@@ -49,11 +49,8 @@
     "build:watch": "tsc -p tsconfig.esm.json --watch"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.4",
     "@types/jest": "^29.5.0",
-    "eslint": "^9.0.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-unused-imports": "^3.1.0",
     "jest": "^29.7.0",
     "rimraf": "^5.0.5",
     "ts-jest": "^29.1.1",
