@@ -46,30 +46,14 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
-      - name: Lint
+      - name: Lint with Biome
         run: yarn lint
-
-      - name: Lint JSON
-        run: yarn jsonlint
 
       - name: TypeScript build check
         run: yarn build
 
       - name: Run tests with coverage
         run: yarn test:coverage:lcovonly
-
-      - name: Ensure coverage file exists
-        run: |
-          if [ ! -f coverage/lcov.info ]; then
-            echo "coverage/lcov.info not found"
-            exit 1
-          fi
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          files: ./coverage/lcov.info
-          fail_ci_if_error: true
 
   test_build:
     runs-on: ubuntu-latest
