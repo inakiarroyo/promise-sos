@@ -4,10 +4,9 @@ module.exports = {
   automock: false,
   collectCoverage: false,
   collectCoverageFrom: [
-    '!<rootDir>/node_modules/',
-    '!<rootDir>/src/**/index.ts',
-    '!<rootDir>/**/*.d.ts',
-    '<rootDir>/src/**/*.{ts,tsx,js,jsx}',
+    '<rootDir>/src/**/*.{ts,tsx,js,jsx}', // include everything first
+    '!<rootDir>/src/**/index.ts', // exclude barrel files
+    '!<rootDir>/**/*.d.ts', // exclude type declarations
   ],
   roots: ['<rootDir>/src'],
   modulePaths: ['<rootDir>/src/'],
