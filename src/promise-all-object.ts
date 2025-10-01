@@ -3,39 +3,39 @@ export type PromisesMap<T> = {
 };
 
 export type PromisesMapResult<T> = {
-  readonly [K in keyof T]: T[K] extends Promise<infer U> ? U : T[K]
+  readonly [K in keyof T]: T[K] extends Promise<infer U> ? U : T[K];
 };
 
 /**
- * A helper function that extends the native Promose.all accepting an object of promises as parameter.
- * @param {PromisesMap<T>} promisesMap object of promises for each property
- * @returns {Promise<PromisesMapResult<T>>} a promise that resolves to an object with the same properties and
- * the resolved values of the promises for each one
- * @throws TypeError if the input is not defined or is not an object
- * @throws Error if any of the promises is rejected
- * @template T represent the input object
+ * Extends `Promise.all` to accept an object of promises as input.
+ *
+ * @template T - The shape of the input object.
+ * @param promisesMap - An object whose values may be promises.
+ * @returns A promise that resolves to an object with the same keys,
+ *          where all promise values are replaced by their resolved values.
+ *          The `readonly` property modifiers of the input are preserved.
+ * @throws {TypeError} If the input is not a non-empty plain object.
  */
-export const promiseAllObject = async <T>(promisesMap: PromisesMap<T>): Promise<PromisesMapResult<T>> => {
+export const promiseAllObject = async <T extends Record<string, unknown>>(
+  promisesMap: PromisesMap<T>
+): Promise<PromisesMapResult<T>> => {
   if (
-    !promisesMap
-    || typeof promisesMap !== 'object'
-    || Object.keys(promisesMap).length === 0 && promisesMap.constructor === Object
+    !promisesMap ||
+    typeof promisesMap !== 'object' ||
+    promisesMap.constructor !== Object ||
+    Object.keys(promisesMap).length === 0
   ) {
-    throw new TypeError('The input argument must be of type Object and not empty');
+    throw new TypeError(
+      'Input must be a non-empty plain object with promises as values.'
+    );
   }
 
-  const keys = Object.keys(promisesMap);
-  const promises = keys.map((key) => (promisesMap as any)[key]); // tslint:disable-line:no-any
+  const entries = Object.entries(promisesMap);
 
-  try {
-    const resolvedPromises = await Promise.all(promises);
+  const resolvedValues = await Promise.all(entries.map(([, value]) => value));
 
-    return resolvedPromises.reduce((resolved, value, index) => {
-      resolved[keys[index]] = value;
-      return resolved;
-    }, {});
-
-  } catch (error) {
-    throw error;
-  }
+  return entries.reduce((acc, [key], index) => {
+    (acc as Record<string, unknown>)[key] = resolvedValues[index];
+    return acc;
+  }, {} as PromisesMapResult<T>);
 };

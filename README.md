@@ -2,67 +2,92 @@
 
 [![npm package](https://img.shields.io/npm/v/promise-sos/latest.svg)](https://www.npmjs.com/package/promise-sos)
 [![npm downloads](https://img.shields.io/npm/dm/promise-sos.svg)](https://www.npmjs.com/package/promise-sos)
-[![CircleCI](https://img.shields.io/circleci/project/github/iarroyo5/promise-sos/master.svg)](https://circleci.com/gh/iarroyo5/promise-sos)
-[![Coverage Status](https://img.shields.io/codecov/c/github/iarroyo5/promise-sos/master.svg)](https://codecov.io/gh/iarroyo5/promise-sos/branch/master)
-[![DevDependencies](https://img.shields.io/david/dev/iarroyo5/promise-sos.svg)](https://david-dm.org/iarroyo5/promise-sos?type=dev)
-[![Dependencies](https://img.shields.io/david/iarroyo5/promise-sos.svg)](https://david-dm.org/iarroyo5/promise-sos)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2fad4dc0c7584ec0bf64a1db58ced5f7)](https://www.codacy.com/app/iarroyo/promise-sos?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=iarroyo5/promise-sos&amp;utm_campaign=Badge_Grade)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2502/badge)](https://bestpractices.coreinfrastructure.org/projects/2502)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-[![Types: TypeScript](https://img.shields.io/npm/types/typescript.svg)](https://www.typescriptlang.org/)
+[![Types: TypeScript](https://img.shields.io/npm/types/promise-sos.svg)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-A typed library that provides utilities for working with promises.
+> A lightweight, fully typed library providing utilities for working with JavaScript promises.
 
-## Installation
+---
+
+## ✨ Features
+
+- 📦 **Tiny** and dependency-free
+- 🔒 **Type-safe** – written in TypeScript
+- ⚡ Works with **ESM** and **CommonJS**
+- 🛠 Provides helpers for combining and managing promises
+
+---
+
+## 📥 Installation
 
 ```sh
-npm i promise-sos
+npm install promise-sos
+# or
+yarn add promise-sos
 ```
 
-## Usage
+---
 
-- `promiseAllObject`
+## 🚀 Usage
 
-  Helper function which receives an object with a promise in each property and returns a promise that resolves to an object with the same properties and the resolved values of the promises.
+### `promiseAllObject`
 
-  ```js
-  import { promiseAllObject } from 'promise-sos';
+A helper function that extends `Promise.all` by allowing you to pass an **object of promises** (instead of an array).
+It returns a promise that resolves to an object with the same keys, but with the promises replaced by their resolved values.
 
-  const promisesObject = {
-    promiseA: Promise.resolve('resolved promiseA'),
-    promiseB: Promise.resolve('resolved promiseB'),
-    1: 'resolved',
-    '1234-5678': 1234
-  };
+#### ✅ Example with mixed values
+```ts
+import { promiseAllObject } from 'promise-sos';
 
+const promisesObject = {
+  promiseA: Promise.resolve('resolved promiseA'),
+  promiseB: Promise.resolve('resolved promiseB'),
+  someValue: 1234,
+  flag: true
+};
+
+const result = await promiseAllObject(promisesObject);
+
+console.log(result);
+// {
+//   promiseA: 'resolved promiseA',
+//   promiseB: 'resolved promiseB',
+//   someValue: 1234,
+//   flag: true
+// }
+```
+
+#### ❌ Example with rejection
+```ts
+import { promiseAllObject } from 'promise-sos';
+
+const promisesObject = {
+  promiseA: Promise.reject(new Error('rejected promiseA')),
+  promiseB: Promise.resolve('resolved promiseB')
+};
+
+try {
   const result = await promiseAllObject(promisesObject);
+} catch (error) {
+  console.error(error);
+  // Error: rejected promiseA
+}
+```
 
-  console.log(result);
+---
 
-  // {
-  //   'promiseA': 'resolved promiseA',
-  //   'promiseB': 'resolved promiseB',
-  //   1: 'resolved',
-  //   '1234-5678': 1234
-  // }
-  ```
+## 📘 API
 
-  ```js
-  import { promiseAllObject } from 'promise-sos';
+### `promiseAllObject<T>(promisesMap: T): Promise<PromisesMapResult<T>>`
 
-  const promisesObject = {
-    promiseA: Promise.reject(new Error('rejected promiseA')),
-    promiseB: Promise.resolve('resolved promiseB')
-  };
+- **`promisesMap`**: An object whose values may be promises or regular values.
+- **Returns**: A promise resolving to an object with the same keys, with all promises unwrapped.
+- **Throws**:
+  - `TypeError` if input is not a non-empty plain object.
+  - Any error from a rejected promise.
 
-  try {
-    const result = await promiseAllObject(promisesObject);
-  } catch (error) {
-    console.log(error);
-  }
-  ```
+---
 
-## License
+## 📝 License
 
-MIT
+MIT © [Inaki Arroyo](http://inakiarroyo.com)
